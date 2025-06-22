@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unified CBM and Normal Calculator</title>
+    <title>CBM Calculator</title>
     <style>
       /* General Reset */
       * {
@@ -19,11 +19,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 100vh; /* Full screen height */
         flex-direction: column;
         padding: 10px;
         margin: 0;
-        overflow: auto;
+        overflow: auto; /* Enable scrolling */
       }
 
       /* Developer's Name and Contact */
@@ -70,7 +70,7 @@
         font-size: 24px;
       }
 
-      /* CBM and Normal Calculator Styles */
+      /* CBM Calculator Styles */
       .cbm-form input, .cbm-form select, .cbm-form button {
         width: 100%;
         padding: 15px;
@@ -103,51 +103,13 @@
         margin-bottom: 15px;
       }
 
-      .buttons {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-      }
-
-      .buttons button {
-        background-color: #ff6f61;
-        color: white;
-        font-size: 24px;
-        padding: 20px;
-        border-radius: 50%;
-        border: none;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .buttons button:hover {
-        background-color: #e04e44;
-      }
-
-      .operation-btn {
-        background-color: #f57c00;
-      }
-
-      .operation-btn:hover {
-        background-color: #e65100;
-      }
-
-      .equal-btn {
-        background-color: #4caf50;
-        color: white;
-      }
-
-      .equal-btn:hover {
-        background-color: #388e3c;
-      }
-
       /* Mobile Responsiveness */
       @media (max-width: 1024px) {
         .container {
           width: 90%;
         }
 
-        .buttons button {
+        .cbm-form button {
           padding: 15px;
           font-size: 20px;
         }
@@ -155,18 +117,14 @@
         .calc-display {
           font-size: 28px;
         }
-
-        .result {
-          font-size: 24px;
-        }
       }
 
       @media (max-width: 768px) {
         .container {
-          width: 80%; /* Set the container to 80% width for mobile */
+          width: 80%;
         }
 
-        .buttons button {
+        .cbm-form button {
           padding: 15px;
           font-size: 18px;
         }
@@ -174,18 +132,14 @@
         .calc-display {
           font-size: 26px;
         }
-
-        .result {
-          font-size: 22px;
-        }
       }
 
       @media (max-width: 480px) {
         .container {
-          width: 80%; /* Ensure it's 80% on smaller screens */
+          width: 80%;
         }
 
-        .buttons button {
+        .cbm-form button {
           padding: 15px;
           font-size: 18px;
         }
@@ -201,13 +155,13 @@
     </style>
   </head>
   <body>
-    <!-- Unified Calculator -->
+    <!-- CBM Calculator Form -->
     <div class="container">
-      <h1>Unified CBM and Normal Calculator</h1>
+      <h1>CBM Calculator</h1>
 
       <!-- CBM Calculator Form -->
       <div id="cbmCalculator" class="cbm-form">
-        <h2>CBM Calculator</h2>
+        <h2>Calculate CBM (Cubic Meter)</h2>
         <input type="number" id="length" placeholder="Length (m)" required>
         <input type="number" id="width" placeholder="Width (m)" required>
         <input type="number" id="height" placeholder="Height (m)" required>
@@ -224,33 +178,13 @@
         <div class="cargo-info" id="cargoInfo"></div> <!-- Cargo info will be displayed here -->
       </div>
 
-      <!-- Normal Calculator Form -->
-      <div id="normalCalculator">
-        <div class="formula" id="formula">Formula: </div>
-        <div class="calc-display" id="calcDisplay">0</div>
-        <div class="buttons">
-          <button class="operation-btn" onclick="clearDisplay()">AC</button>
-          <button class="operation-btn" onclick="appendOperation('%')">%</button>
-          <button class="operation-btn" onclick="appendOperation('(')">(</button>
-          <button class="operation-btn" onclick="appendOperation(')')">)</button>
-          <button onclick="appendNumber(7)">7</button>
-          <button onclick="appendNumber(8)">8</button>
-          <button onclick="appendNumber(9)">9</button>
-          <button class="operation-btn" onclick="appendOperation('+')">+</button>
-          <button onclick="appendNumber(4)">4</button>
-          <button onclick="appendNumber(5)">5</button>
-          <button onclick="appendNumber(6)">6</button>
-          <button class="operation-btn" onclick="appendOperation('-')">-</button>
-          <button onclick="appendNumber(1)">1</button>
-          <button onclick="appendNumber(2)">2</button>
-          <button onclick="appendNumber(3)">3</button>
-          <button class="operation-btn" onclick="appendOperation('*')">*</button>
-          <button onclick="appendNumber(0)">0</button>
-          <button onclick="appendNumber('.')">.</button>
-          <button class="equal-btn" onclick="calculateResult()">=</button>
-          <button class="operation-btn" onclick="appendOperation('/')">/</button>
-          <button class="operation-btn" onclick="deleteLast()">←</button>
-        </div>
+      <!-- Developer's Info and Contact -->
+      <div class="developer-info">
+        <p><strong>Friends Knitting Limited</strong></p>
+      </div>
+      <div class="developer-contact">
+        <p>Contact: <strong>+8801794014381</strong></p>
+        <p><a href="https://wa.me/+8801794014381" class="whatsapp-link" target="_blank">WhatsApp</a></p>
       </div>
     </div>
 
@@ -295,61 +229,6 @@
         let cargo = volume / 32;
         document.getElementById('cargoInfo').innerText = `Cargo: ${cargo.toFixed(2)} car(s)`;
       });
-
-      // Normal Calculator logic
-      let currentInput = '0';
-      let formula = '';
-
-      function updateFormula() {
-        document.getElementById('formula').innerText = 'Formula: ' + formula;
-      }
-
-      function appendNumber(number) {
-        if (currentInput === '0') {
-          currentInput = String(number);
-        } else {
-          currentInput += String(number);
-        }
-        updateFormula();
-        updateDisplay();
-      }
-
-      function appendOperation(operation) {
-        formula += currentInput + ' ' + operation + ' ';
-        currentInput = '0';
-        updateFormula();
-        updateDisplay();
-      }
-
-      function calculateResult() {
-        formula += currentInput;
-        try {
-          let result = eval(formula);
-          currentInput = result.toFixed(3).toString();
-          formula = result.toFixed(3).toString();
-          updateFormula();
-        } catch (error) {
-          currentInput = 'Error';
-        }
-        updateDisplay();
-      }
-
-      function clearDisplay() {
-        currentInput = '0';
-        formula = '';
-        updateFormula();
-        updateDisplay();
-      }
-
-      function deleteLast() {
-        currentInput = currentInput.slice(0, -1) || '0';
-        updateFormula();
-        updateDisplay();
-      }
-
-      function updateDisplay() {
-        document.getElementById('calcDisplay').textContent = currentInput;
-      }
     </script>
   </body>
 </html>
