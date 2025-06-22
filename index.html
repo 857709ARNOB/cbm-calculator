@@ -12,6 +12,7 @@
         box-sizing: border-box;
       }
 
+      /* Body styles */
       body {
         font-family: 'Arial', sans-serif;
         background-color: #f1f1f1;
@@ -21,6 +22,7 @@
         height: 100vh;
         flex-direction: column;
         padding: 10px;
+        margin: 0;
       }
 
       /* Developer's Name and Contact */
@@ -56,19 +58,22 @@
         background-color: #ffb6c1; /* Pink color similar to Casio */
         border-radius: 20px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        margin-top: 3in; /* 3-inch gap from the top */
+        margin-top: 0in; /* 0-inch gap from the top */
         text-align: center;
+        margin-left: auto;
+        margin-right: auto;
       }
 
+      /* Headings */
       h1 {
         color: #000;
         margin-bottom: 20px;
         font-size: 24px;
       }
 
-      /* CBM Calculator Layout - Vertically aligned inputs */
+      /* CBM Calculator Layout - Auto-adjust width of inputs */
       .cbm-form input, .cbm-form select, .cbm-form button {
-        width: 100%;
+        width: 100%; /* Auto adjust to the container width */
         padding: 15px;
         margin: 10px 0;
         border-radius: 25px;
@@ -105,23 +110,6 @@
         font-weight: bold;
         color: #333;
         margin-top: 20px;
-      }
-
-      /* Back Button */
-      .back-btn {
-        background-color: #ff4081; /* Pink background for the back button */
-        color: white;
-        font-size: 18px;
-        padding: 12px 24px;
-        border-radius: 25px;
-        border: none;
-        margin-bottom: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .back-btn:hover {
-        background-color: #f50057; /* Darker pink on hover */
       }
 
       /* Button Style */
@@ -175,15 +163,15 @@
       }
 
       /* Mobile Responsiveness */
-      @media (max-width: 768px) {
+      @media (max-width: 1024px) {
         .container {
           width: 90%;
           height: auto;
         }
 
         .buttons button {
-          padding: 20px;
-          font-size: 18px;
+          padding: 15px;
+          font-size: 20px;
         }
 
         .calc-display {
@@ -195,14 +183,34 @@
         }
       }
 
-      @media (max-width: 480px) {
+      @media (max-width: 768px) {
         .container {
-          width: 90%;
+          width: 95%;
           height: auto;
         }
 
         .buttons button {
-          padding: 20px;
+          padding: 15px;
+          font-size: 18px;
+        }
+
+        .calc-display {
+          font-size: 26px;
+        }
+
+        .result {
+          font-size: 22px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          width: 95%;
+          height: auto;
+        }
+
+        .buttons button {
+          padding: 15px;
           font-size: 18px;
         }
 
@@ -284,11 +292,6 @@
     </div>
 
     <script>
-      // Back Button Function
-      function goBack() {
-        window.history.back();
-      }
-
       // CBM Calculator logic
       document.getElementById('cbmForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -333,16 +336,12 @@
 
       // Normal Calculator logic
       let currentInput = '0';
-      let currentOperation = null;
-      let previousInput = null;
       let formula = '';  // Variable to store the formula as a string
 
-      // Update the displayed formula
       function updateFormula() {
         document.getElementById('formula').innerText = 'Formula: ' + formula;
       }
 
-      // Append numbers to the current input
       function appendNumber(number) {
         if (currentInput === '0') {
           currentInput = String(number);
@@ -353,7 +352,6 @@
         updateDisplay();
       }
 
-      // Append operations to the current operation string
       function appendOperation(operation) {
         formula += currentInput + ' ' + operation + ' ';
         currentInput = '0';
@@ -361,12 +359,11 @@
         updateDisplay();
       }
 
-      // Calculate and update the result
       function calculateResult() {
         formula += currentInput;
         try {
-          let result = eval(formula);  // Use eval to calculate the formula
-          currentInput = result.toFixed(3).toString(); // Always show 3 decimal places
+          let result = eval(formula);
+          currentInput = result.toFixed(3).toString();
           formula = result.toFixed(3).toString();
           updateFormula();
         } catch (error) {
@@ -375,7 +372,6 @@
         updateDisplay();
       }
 
-      // Clear the current display and formula
       function clearDisplay() {
         currentInput = '0';
         formula = '';
@@ -383,14 +379,12 @@
         updateDisplay();
       }
 
-      // Delete the last character (Backspace)
       function deleteLast() {
-        currentInput = currentInput.slice(0, -1) || '0';  // Remove the last character, or reset to 0
+        currentInput = currentInput.slice(0, -1) || '0';
         updateFormula();
         updateDisplay();
       }
 
-      // Update the display with the current input
       function updateDisplay() {
         document.getElementById('calcDisplay').textContent = currentInput;
       }
