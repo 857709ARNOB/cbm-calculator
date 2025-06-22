@@ -18,12 +18,12 @@
         background-color: #f1f1f1;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         height: 100vh; /* Ensure body takes full height of the viewport */
         flex-direction: column;
         padding: 10px;
         margin: 0; /* Remove any margin */
-        overflow: hidden; /* Hide any content overflow */
+        overflow: auto; /* Enable scrolling */
       }
 
       /* Developer's Name and Contact */
@@ -60,6 +60,7 @@
         text-align: center;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 20px; /* Space between calculators */
       }
 
       /* Headings */
@@ -223,8 +224,8 @@
     </style>
   </head>
   <body>
+    <!-- CBM Calculator Section -->
     <div class="container">
-      <!-- CBM Calculator -->
       <h1>CBM Calculator</h1>
       <form id="cbmForm" class="cbm-form">
         <input type="number" id="length" placeholder="Length (m)" required>
