@@ -25,46 +25,44 @@
 
       /* Container Style */
       .container {
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        width: 80%;  /* 80% of screen width */
-        height: 40%; /* 40% of screen height */
+        width: 80%;
+        max-width: 500px; /* Limit max width */
+        height: 80%;
         padding: 20px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        background-color: #fdbd44;
-        border-radius: 20px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 30px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         margin-top: 2in; /* 2-inch gap from the top */
         text-align: center;
       }
 
       h1 {
-        color: white;
+        color: #000;
         margin-bottom: 20px;
         font-size: 24px;
       }
 
-      /* Common Input and Button Style */
-      input, select, button {
-        width: 100%;
-        padding: 15px;
-        margin: 10px 0;
-        border-radius: 25px;
-        border: none;
-        font-size: 16px;
-        box-sizing: border-box;
+      /* Formula Display */
+      .formula {
+        font-size: 18px;
+        color: #000;
+        margin-top: 10px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 20px;
       }
 
-      /* CBM Calculator Specific */
-      .cbm-input, .normal-calculator .calc-display {
-        background-color: white;
-        border-radius: 25px;
-        font-size: 20px;
+      .result {
+        font-size: 30px;
+        font-weight: bold;
         color: #333;
+        margin-top: 20px;
       }
 
-      /* Buttons Style */
+      /* Button Style */
       .buttons {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -72,9 +70,9 @@
       }
 
       .buttons button {
-        background-color: #ff8c00; /* Orange background */
+        background-color: #00bcd4; /* Blue background for number buttons */
         color: white;
-        font-size: 20px;
+        font-size: 24px;
         padding: 20px;
         border-radius: 50%;
         border: none;
@@ -83,47 +81,34 @@
       }
 
       .buttons button:hover {
-        background-color: #ff6a00; /* Darker orange */
+        background-color: #008c96; /* Darker blue on hover */
       }
 
-      .clear-btn {
-        background-color: #e74c3c;
+      .operation-btn {
+        background-color: #ff9800; /* Orange background for operations */
+      }
+
+      .operation-btn:hover {
+        background-color: #f57c00; /* Darker orange on hover */
       }
 
       .equal-btn {
-        background-color: #2ecc71;
-      }
-
-      .calc-display {
-        background-color: #34495e;
+        background-color: #4caf50; /* Green background for equal */
         color: white;
-        font-size: 32px;
-        text-align: right;
-        padding: 20px;
-        border-radius: 25px;
-        width: 100%;
-        margin-bottom: 15px;
       }
 
-      /* Formula Display */
-      .formula {
-        font-size: 18px;
-        color: #fff;
-        margin-top: 10px;
-        font-weight: bold;
+      .equal-btn:hover {
+        background-color: #388e3c; /* Darker green on hover */
       }
 
       /* Mobile Responsiveness */
       @media (max-width: 768px) {
         .container {
-          width: 80%;
-          height: 80%;
-          padding: 10px;
-          max-width: 100%;
+          width: 90%;
+          height: 70%;
         }
 
         .buttons button {
-          padding: 20px;
           font-size: 18px;
         }
 
@@ -132,25 +117,18 @@
         }
 
         .result {
-          font-size: 20px;
+          font-size: 24px;
         }
       }
 
       @media (max-width: 480px) {
         .container {
-          width: 80%;
-          height: 80%;
-          padding: 15px;
-          max-width: 100%;
-        }
-
-        .buttons {
-          grid-template-columns: repeat(4, 1fr);
+          width: 90%;
+          height: 70%;
         }
 
         .buttons button {
-          padding: 20px;
-          font-size: 18px;
+          font-size: 16px;
         }
 
         h1 {
@@ -158,134 +136,57 @@
         }
 
         .result {
-          font-size: 18px;
+          font-size: 22px;
         }
-      }
-
-      /* Developer Contact Section */
-      .developer-info {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 16px;
-        color: #34495e;
-      }
-
-      .whatsapp-link {
-        color: #25D366; /* WhatsApp green */
-        text-decoration: none;
-        font-weight: bold;
-      }
-
-      .developer-info a {
-        text-decoration: none;
-        color: #2575fc;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>CBM Calculator</h1>
-      <form id="cbmForm">
-        <input type="number" id="length" placeholder="Length" required>
-        <input type="number" id="width" placeholder="Width" required>
-        <input type="number" id="height" placeholder="Height" required>
-        <input type="number" id="quantity" placeholder="Quantity" required>
-        <select id="unit" required>
-          <option value="mm">mm</option>
-          <option value="cm">cm</option>
-          <option value="inch">inch</option>
-          <option value="feet">feet</option>
-        </select>
-        <button type="submit">Calculate CBM</button>
-      </form>
+      <h1>Calculator</h1>
+      <div class="formula" id="formula">Formula: </div> <!-- Display the formula used -->
+      <div class="result" id="calcDisplay">0</div> <!-- Display the result -->
 
-      <div class="formula" id="formula"></div>  <!-- Display the formula -->
-      <div class="result" id="result"></div>
-    </div>
-
-    <!-- Normal Calculator Section -->
-    <div class="container normal-calculator">
-      <div class="calc-display" id="calcDisplay">0</div>
       <div class="buttons">
-        <button class="clear-btn" onclick="clearDisplay()">C</button>
+        <button class="operation-btn" onclick="clearDisplay()">AC</button>
+        <button class="operation-btn" onclick="appendOperation('%')">%</button>
+        <button class="operation-btn" onclick="appendOperation('(')">(</button>
+        <button class="operation-btn" onclick="appendOperation(')')">)</button>
+        
         <button onclick="appendNumber(7)">7</button>
         <button onclick="appendNumber(8)">8</button>
         <button onclick="appendNumber(9)">9</button>
-        <button onclick="setOperation('+')">+</button>
+        <button class="operation-btn" onclick="appendOperation('+')">+</button>
+        
         <button onclick="appendNumber(4)">4</button>
         <button onclick="appendNumber(5)">5</button>
         <button onclick="appendNumber(6)">6</button>
-        <button onclick="setOperation('-')">-</button>
+        <button class="operation-btn" onclick="appendOperation('-')">-</button>
+        
         <button onclick="appendNumber(1)">1</button>
         <button onclick="appendNumber(2)">2</button>
         <button onclick="appendNumber(3)">3</button>
-        <button onclick="setOperation('*')">*</button>
+        <button class="operation-btn" onclick="appendOperation('*')">*</button>
+        
         <button onclick="appendNumber(0)">0</button>
         <button onclick="appendNumber('.')">.</button>
         <button class="equal-btn" onclick="calculateResult()">=</button>
-        <button onclick="setOperation('/')">/</button>
+        <button class="operation-btn" onclick="appendOperation('/')">/</button>
       </div>
     </div>
 
-    <!-- Developer Contact Info -->
-    <div class="developer-info">
-      <p>Developer: <strong>+8801794014381</strong></p>
-      <p>
-        <a href="https://wa.me/+8801794014381" class="whatsapp-link" target="_blank">
-          WhatsApp Contact
-        </a>
-      </p>
-    </div>
-
     <script>
-      // CBM Calculator logic
-      document.getElementById('cbmForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var length = parseFloat(document.getElementById('length').value);
-        var width = parseFloat(document.getElementById('width').value);
-        var height = parseFloat(document.getElementById('height').value);
-        var quantity = parseInt(document.getElementById('quantity').value);
-        var unit = document.getElementById('unit').value;
-
-        // Check if all inputs are valid
-        if (isNaN(length) || isNaN(width) || isNaN(height) || isNaN(quantity) || !unit) {
-          document.getElementById('result').innerText = 'Please fill in all fields correctly.';
-          return;
-        }
-
-        const conversionFactors = {
-          mm: 0.001,
-          cm: 0.01,
-          inch: 0.0254,
-          feet: 0.3048
-        };
-
-        let factor = conversionFactors[unit];
-        if (!factor) {
-          document.getElementById('result').innerText = 'Invalid unit';
-          return;
-        }
-
-        length = length * factor;
-        width = width * factor;
-        height = height * factor;
-
-        // Calculate volume in cubic meters
-        let volume = length * width * height * quantity;
-        document.getElementById('formula').innerText = `Formula: ${length} * ${width} * ${height} * ${quantity} = ${volume.toFixed(3)} m³`;  // Show the formula
-        document.getElementById('result').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
-      });
-
-      // Normal Calculator logic
       let currentInput = '0';
       let currentOperation = null;
       let previousInput = null;
+      let formula = '';  // Variable to store the formula as a string
 
-      function updateDisplay() {
-        document.getElementById('calcDisplay').textContent = currentInput;
+      // Update the displayed formula
+      function updateFormula() {
+        document.getElementById('formula').innerText = 'Formula: ' + formula;
       }
 
+      // Append numbers to the current input
       function appendNumber(number) {
         if (currentInput === '0') {
           currentInput = String(number);
@@ -295,47 +196,39 @@
         updateDisplay();
       }
 
-      function setOperation(operation) {
-        if (currentOperation !== null) {
-          calculateResult();
-        }
-        previousInput = currentInput;
+      // Append operations to the current operation string
+      function appendOperation(operation) {
+        formula += currentInput + ' ' + operation + ' ';
         currentInput = '0';
-        currentOperation = operation;
-      }
-
-      function calculateResult() {
-        if (currentOperation === null || previousInput === null) return;
-        let result;
-        const prev = parseFloat(previousInput);
-        const current = parseFloat(currentInput);
-        switch (currentOperation) {
-          case '+':
-            result = prev + current;
-            break;
-          case '-':
-            result = prev - current;
-            break;
-          case '*':
-            result = prev * current;
-            break;
-          case '/':
-            result = prev / current;
-            break;
-        }
-
-        result = result.toFixed(3);  // Limits to 3 decimal places
-        currentInput = result;
-        currentOperation = null;
-        previousInput = null;
+        updateFormula();
         updateDisplay();
       }
 
+      // Calculate and update the result
+      function calculateResult() {
+        formula += currentInput;
+        try {
+          let result = eval(formula);  // Use eval to calculate the formula
+          currentInput = result.toString();
+          formula = result.toString();
+          updateFormula();
+        } catch (error) {
+          currentInput = 'Error';
+        }
+        updateDisplay();
+      }
+
+      // Clear the current display and formula
       function clearDisplay() {
         currentInput = '0';
-        currentOperation = null;
-        previousInput = null;
+        formula = '';
+        updateFormula();
         updateDisplay();
+      }
+
+      // Update the display with the current input
+      function updateDisplay() {
+        document.getElementById('calcDisplay').textContent = currentInput;
       }
     </script>
   </body>
