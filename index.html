@@ -105,6 +105,14 @@
         margin-bottom: 15px;
       }
 
+      /* Formula Display */
+      .formula {
+        font-size: 18px;
+        color: #fff;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
       /* Mobile Responsiveness */
       @media (max-width: 768px) {
         .container {
@@ -191,6 +199,7 @@
         <button type="submit">Calculate CBM</button>
       </form>
 
+      <div class="formula" id="formula"></div>  <!-- Display the formula -->
       <div class="result" id="result"></div>
     </div>
 
@@ -220,7 +229,7 @@
 
     <!-- Developer Contact Info -->
     <div class="developer-info">
-      <p>Developer: <strong>*SD*SHANTO*SD*</strong></p>
+      <p>Developer: <strong>+8801794014381</strong></p>
       <p>
         <a href="https://wa.me/+8801794014381" class="whatsapp-link" target="_blank">
           WhatsApp Contact
@@ -264,6 +273,7 @@
 
         // Calculate volume in cubic meters
         let volume = length * width * height * quantity;
+        document.getElementById('formula').innerText = `Formula: ${length} * ${width} * ${height} * ${quantity} = ${volume.toFixed(3)} m³`;  // Show the formula
         document.getElementById('result').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
       });
 
