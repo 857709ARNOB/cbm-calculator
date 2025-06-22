@@ -26,7 +26,7 @@
       /* Container Style */
       .container {
         width: 80%;
-        max-width: 500px; /* Limit max width */
+        max-width: 600px; /* Limit max width */
         height: 80%;
         padding: 20px;
         display: flex;
@@ -60,6 +60,23 @@
         font-weight: bold;
         color: #333;
         margin-top: 20px;
+      }
+
+      /* Back Button */
+      .back-btn {
+        background-color: #ff4081; /* Pink background for the back button */
+        color: white;
+        font-size: 18px;
+        padding: 12px 24px;
+        border-radius: 25px;
+        border: none;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background-color: #f50057; /* Darker pink on hover */
       }
 
       /* Button Style */
@@ -101,6 +118,17 @@
         background-color: #388e3c; /* Darker green on hover */
       }
 
+      .calc-display {
+        background-color: #34495e;
+        color: white;
+        font-size: 32px;
+        text-align: right;
+        padding: 20px;
+        border-radius: 25px;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
       /* Mobile Responsiveness */
       @media (max-width: 768px) {
         .container {
@@ -109,6 +137,7 @@
         }
 
         .buttons button {
+          padding: 20px;
           font-size: 18px;
         }
 
@@ -128,7 +157,8 @@
         }
 
         .buttons button {
-          font-size: 16px;
+          padding: 20px;
+          font-size: 18px;
         }
 
         h1 {
@@ -142,11 +172,33 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Calculator</h1>
-      <div class="formula" id="formula">Formula: </div> <!-- Display the formula used -->
-      <div class="result" id="calcDisplay">0</div> <!-- Display the result -->
+    <!-- Back Button -->
+    <button class="back-btn" onclick="goBack()">Back</button>
 
+    <div class="container">
+      <!-- CBM Calculator -->
+      <h1>CBM Calculator</h1>
+      <form id="cbmForm">
+        <input type="number" id="length" placeholder="Length" required>
+        <input type="number" id="width" placeholder="Width" required>
+        <input type="number" id="height" placeholder="Height" required>
+        <input type="number" id="quantity" placeholder="Quantity" required>
+        <select id="unit" required>
+          <option value="mm">mm</option>
+          <option value="cm">cm</option>
+          <option value="inch">inch</option>
+          <option value="feet">feet</option>
+        </select>
+        <button type="submit">Calculate CBM</button>
+      </form>
+
+      <div class="formula" id="formula">Formula: </div>  <!-- Display the formula -->
+      <div class="result" id="result"></div>
+    </div>
+
+    <!-- Normal Calculator Section -->
+    <div class="container normal-calculator">
+      <div class="calc-display" id="calcDisplay">0</div>
       <div class="buttons">
         <button class="operation-btn" onclick="clearDisplay()">AC</button>
         <button class="operation-btn" onclick="appendOperation('%')">%</button>
@@ -175,7 +227,62 @@
       </div>
     </div>
 
+    <!-- Developer Contact Info -->
+    <div class="developer-info">
+      <p>Developer: <strong>+8801794014381</strong></p>
+      <p>
+        <a href="https://wa.me/+8801794014381" class="whatsapp-link" target="_blank">
+          WhatsApp Contact
+        </a>
+      </p>
+    </div>
+
     <script>
+      // Back Button Function
+      function goBack() {
+        window.history.back();
+      }
+
+      // CBM Calculator logic
+      document.getElementById('cbmForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var length = parseFloat(document.getElementById('length').value);
+        var width = parseFloat(document.getElementById('width').value);
+        var height = parseFloat(document.getElementById('height').value);
+        var quantity = parseInt(document.getElementById('quantity').value);
+        var unit = document.getElementById('unit').value;
+
+        // Check if all inputs are valid
+        if (isNaN(length) || isNaN(width) || isNaN(height) || isNaN(quantity) || !unit) {
+          document.getElementById('result').innerText = 'Please fill in all fields correctly.';
+          return;
+        }
+
+        const conversionFactors = {
+          mm: 0.001,
+          cm: 0.01,
+          inch: 0.0254,
+          feet: 0.3048
+        };
+
+        let factor = conversionFactors[unit];
+        if (!factor) {
+          document.getElementById('result').innerText = 'Invalid unit';
+          return;
+        }
+
+        length = length * factor;
+        width = width * factor;
+        height = height * factor;
+
+        // Calculate volume in cubic meters
+        let volume = length * width * height * quantity;
+        document.getElementById('formula').innerText = `Formula: ${length} * ${width} * ${height} * ${quantity} = ${volume.toFixed(3)} m³`;  // Show the formula
+        document.getElementById('result').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
+      });
+
+      // Normal Calculator logic
       let currentInput = '0';
       let currentOperation = null;
       let previousInput = null;
