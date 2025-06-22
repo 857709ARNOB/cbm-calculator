@@ -53,6 +53,8 @@
         font-weight: bold;
         display: inline-block;
         margin-bottom: 20px;
+        text-align: left;
+        width: 100%;
       }
 
       .result {
@@ -199,6 +201,7 @@
 
     <!-- Normal Calculator Section -->
     <div class="container normal-calculator">
+      <div class="formula" id="formula">Formula: </div> <!-- Display the formula -->
       <div class="calc-display" id="calcDisplay">0</div>
       <div class="buttons">
         <button class="operation-btn" onclick="clearDisplay()">AC</button>
@@ -307,6 +310,7 @@
         } else {
           currentInput += String(number);
         }
+        updateFormula();
         updateDisplay();
       }
 
@@ -343,6 +347,7 @@
       // Delete the last character (Backspace)
       function deleteLast() {
         currentInput = currentInput.slice(0, -1) || '0';  // Remove the last character, or reset to 0
+        updateFormula();
         updateDisplay();
       }
 
