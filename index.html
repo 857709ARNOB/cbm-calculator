@@ -45,6 +45,28 @@
         font-size: 24px;
       }
 
+      /* CBM Calculator Layout - Vertically aligned inputs */
+      .cbm-form input, .cbm-form select, .cbm-form button {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 25px;
+        border: none;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      .cbm-form button {
+        background-color: #ff6f61; /* Light pink */
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .cbm-form button:hover {
+        background-color: #e04e44; /* Darker pink on hover */
+      }
+
       /* Formula Display (For Normal Calculator only) */
       .formula {
         font-size: 18px;
@@ -180,10 +202,10 @@
     <div class="container">
       <!-- CBM Calculator -->
       <h1>CBM Calculator</h1>
-      <form id="cbmForm">
-        <input type="number" id="length" placeholder="Length" required>
-        <input type="number" id="width" placeholder="Width" required>
-        <input type="number" id="height" placeholder="Height" required>
+      <form id="cbmForm" class="cbm-form">
+        <input type="number" id="length" placeholder="Length (m)" required>
+        <input type="number" id="width" placeholder="Width (m)" required>
+        <input type="number" id="height" placeholder="Height (m)" required>
         <input type="number" id="quantity" placeholder="Quantity" required>
         <select id="unit" required>
           <option value="mm">mm</option>
@@ -327,8 +349,8 @@
         formula += currentInput;
         try {
           let result = eval(formula);  // Use eval to calculate the formula
-          currentInput = result.toString();
-          formula = result.toString();
+          currentInput = result.toFixed(3).toString(); // Always show 3 decimal places
+          formula = result.toFixed(3).toString();
           updateFormula();
         } catch (error) {
           currentInput = 'Error';
