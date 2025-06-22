@@ -129,13 +129,6 @@
         margin-bottom: 15px;
       }
 
-      .cargo-info {
-        font-size: 18px;
-        color: #333;
-        margin-top: 20px;
-        font-weight: bold;
-      }
-
       /* Mobile Responsiveness */
       @media (max-width: 768px) {
         .container {
@@ -232,6 +225,9 @@
         <button onclick="appendNumber('.')">.</button>
         <button class="equal-btn" onclick="calculateResult()">=</button>
         <button class="operation-btn" onclick="appendOperation('/')">/</button>
+        
+        <!-- Backspace Button -->
+        <button class="operation-btn" onclick="deleteLast()">←</button> <!-- Backspace/Delete button -->
       </div>
     </div>
 
@@ -341,6 +337,12 @@
         currentInput = '0';
         formula = '';
         updateFormula();
+        updateDisplay();
+      }
+
+      // Delete the last character (Backspace)
+      function deleteLast() {
+        currentInput = currentInput.slice(0, -1) || '0';  // Remove the last character, or reset to 0
         updateDisplay();
       }
 
