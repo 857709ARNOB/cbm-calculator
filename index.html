@@ -225,8 +225,8 @@
         let volume = length * width * height * quantity;
         document.getElementById('cbmResult').innerText = 'Total : ' + volume.toFixed(3) + ' CBM';
 
-        // Cargo Calculation: 32 CBM = 1 car
-        let cargo = volume / 32;
+        // Cargo Calculation: 30 CBM = 1 car
+        let cargo = volume / 30;
         document.getElementById('cargoInfo').innerText = `Cargo: ${cargo.toFixed(2)} গাড়ি লাগবে (আনুমানিক)`;
       });
     </script>
