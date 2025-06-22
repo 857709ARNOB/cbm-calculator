@@ -35,8 +35,8 @@
       /* Container Style */
       .container {
         background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        width: 100%;
-        max-width: 400px;
+        width: 80%;  /* Make the container 80% of the screen width */
+        max-width: 500px; /* Set a max width for larger screens */
         padding: 20px;
         border-radius: 20px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -134,10 +134,29 @@
         background-color: #2ecc71;
       }
 
+      /* Developer Contact Section */
+      .developer-info {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 16px;
+        color: #34495e;
+      }
+
+      .whatsapp-link {
+        color: #25D366; /* WhatsApp green */
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .developer-info a {
+        text-decoration: none;
+        color: #2575fc;
+      }
+
       /* Mobile Responsiveness */
       @media (max-width: 768px) {
         .container {
-          width: 100%;
+          width: 80%;
           padding: 10px;
           max-width: 100%;
         }
@@ -183,7 +202,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>CBM Calculator</h1>
+      <h1>CBM Calculator (SD)</h1>
       <form id="cbmForm">
         <input type="number" id="length" placeholder="Length" required>
         <input type="number" id="width" placeholder="Width" required>
@@ -223,6 +242,16 @@
         <button class="equal-btn" onclick="calculateResult()">=</button>
         <button onclick="setOperation('/')">/</button>
       </div>
+    </div>
+
+    <!-- Developer Contact Info -->
+    <div class="developer-info">
+      <p>Developer: <strong>+8801794014381</strong></p>
+      <p>
+        <a href="https://wa.me/+8801794014381" class="whatsapp-link" target="_blank">
+          WhatsApp Contact
+        </a>
+      </p>
     </div>
 
     <script>
