@@ -51,8 +51,10 @@ body {
   background-color: #ffb6c1; /* Pink color similar to Casio */
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-top: 3in; /* 3-inch gap from the top */
+  margin-top: 0in; /* 0-inch gap from the top */
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Headings */
@@ -62,9 +64,9 @@ h1 {
   font-size: 24px;
 }
 
-/* CBM Calculator Layout */
+/* CBM Calculator Layout - Auto-adjust width of inputs */
 .cbm-form input, .cbm-form select, .cbm-form button {
-  width: 100%;
+  width: 100%; /* Auto adjust to the container width */
   padding: 15px;
   margin: 10px 0;
   border-radius: 25px;
