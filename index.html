@@ -48,7 +48,7 @@
       /* Container Style */
       .container {
         width: 100%;
-        max-width: 450px;
+        max-width: 1200px;
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -155,11 +155,15 @@
         .calc-display {
           font-size: 28px;
         }
+
+        .result {
+          font-size: 24px;
+        }
       }
 
       @media (max-width: 768px) {
         .container {
-          width: 95%;
+          width: 80%; /* Set the container to 80% width for mobile */
         }
 
         .buttons button {
@@ -170,11 +174,15 @@
         .calc-display {
           font-size: 26px;
         }
+
+        .result {
+          font-size: 22px;
+        }
       }
 
       @media (max-width: 480px) {
         .container {
-          width: 95%;
+          width: 80%; /* Ensure it's 80% on smaller screens */
         }
 
         .buttons button {
