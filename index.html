@@ -21,6 +21,7 @@
         align-items: center;
         height: 100vh;
         flex-direction: column;
+        padding: 10px; /* Add padding for mobile responsiveness */
       }
 
       .container {
@@ -31,11 +32,13 @@
         border-radius: 20px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
+        margin-bottom: 20px; /* Added margin-bottom to separate the sections */
       }
 
       h1 {
         color: white;
         margin-bottom: 20px;
+        font-size: 24px;
       }
 
       input, select, button {
@@ -45,6 +48,7 @@
         border-radius: 8px;
         border: 1px solid #ccc;
         font-size: 16px;
+        box-sizing: border-box; /* Prevents overflow issues */
       }
 
       input, select {
@@ -72,7 +76,6 @@
 
       /* Normal Calculator Styles */
       .calculator {
-        margin-top: 40px;
         background: #ffffff;
         padding: 15px;
         border-radius: 15px;
@@ -117,6 +120,48 @@
 
       .equal-btn {
         background-color: #2ecc71;
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .container {
+          width: 100%;
+          padding: 10px;
+          max-width: 100%;
+        }
+
+        .buttons button {
+          padding: 20px; /* Slightly smaller buttons on smaller screens */
+          font-size: 18px; /* Slightly smaller font */
+        }
+
+        .calc-display {
+          font-size: 28px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 15px;
+          max-width: 100%;
+        }
+
+        .buttons {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        .buttons button {
+          padding: 20px; /* Adjust padding for better touch interactions */
+          font-size: 18px;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+
+        .result {
+          font-size: 20px;
+        }
       }
     </style>
   </head>
