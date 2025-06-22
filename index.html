@@ -162,10 +162,10 @@
       <!-- CBM Calculator Form -->
       <div id="cbmCalculator" class="cbm-form">
         <h2>Friends Knitting Limited</h2>
-        <input type="number" id="length" placeholder="Length (m)" required>
-        <input type="number" id="width" placeholder="Width (m)" required>
-        <input type="number" id="height" placeholder="Height (m)" required>
-        <input type="number" id="quantity" placeholder="Quantity" required>
+        <input type="number" id="length" placeholder="কার্টুনের দৈর্ঘ্য (length) " required>
+        <input type="number" id="width" placeholder="কার্টুনের প্রস্থ (Width)" required>
+        <input type="number" id="height" placeholder="কার্টুনের উচ্চতার (Height)" required>
+        <input type="number" id="quantity" placeholder="কার্টুনের পরিমাণ (Quantity)" required>
         <select id="unit" required>
           <option value="mm">mm</option>
           <option value="cm">cm</option>
@@ -223,11 +223,11 @@
         height = height * factor;
 
         let volume = length * width * height * quantity;
-        document.getElementById('cbmResult').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
+        document.getElementById('cbmResult').innerText = 'Total : ' + volume.toFixed(3) + ' CBM';
 
         // Cargo Calculation: 32 CBM = 1 car
         let cargo = volume / 32;
-        document.getElementById('cargoInfo').innerText = `Cargo: ${cargo.toFixed(2)} car(s)`;
+        document.getElementById('cargoInfo').innerText = `Cargo: ${cargo.toFixed(2)} গাড়ি লাগবে (আনুমানিক)`;
       });
     </script>
   </body>
