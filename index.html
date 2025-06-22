@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBM Calculator</title>
+    <title>CBM and Normal Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
     <style>
       /* General Reset */
       * {
@@ -21,6 +20,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+        flex-direction: column;
       }
 
       .container {
@@ -70,16 +70,53 @@
         margin-top: 20px;
       }
 
-      @media (max-width: 768px) {
-        .container {
-          width: 80%;
-        }
+      /* Normal Calculator Styles */
+      .calculator {
+        margin-top: 40px;
+        background: #ffffff;
+        padding: 15px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
       }
 
-      @media (max-width: 480px) {
-        .container {
-          width: 90%;
-        }
+      .calc-display {
+        background-color: #34495e;
+        color: white;
+        font-size: 32px;
+        text-align: right;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+
+      .buttons button {
+        background-color: #34495e;
+        color: white;
+        font-size: 20px;
+        padding: 25px;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+      }
+
+      .buttons button:hover {
+        background-color: #16a085;
+      }
+
+      .clear-btn {
+        background-color: #e74c3c;
+      }
+
+      .equal-btn {
+        background-color: #2ecc71;
       }
     </style>
   </head>
@@ -97,13 +134,38 @@
           <option value="inch">inch</option>
           <option value="feet">feet</option>
         </select>
-        <button type="submit">Calculate</button>
+        <button type="submit">Calculate CBM</button>
       </form>
 
       <div class="result" id="result"></div>
     </div>
 
+    <!-- Normal Calculator Section -->
+    <div class="calculator">
+      <div class="calc-display" id="calcDisplay">0</div>
+      <div class="buttons">
+        <button class="clear-btn" onclick="clearDisplay()">C</button>
+        <button onclick="appendNumber(7)">7</button>
+        <button onclick="appendNumber(8)">8</button>
+        <button onclick="appendNumber(9)">9</button>
+        <button onclick="setOperation('+')">+</button>
+        <button onclick="appendNumber(4)">4</button>
+        <button onclick="appendNumber(5)">5</button>
+        <button onclick="appendNumber(6)">6</button>
+        <button onclick="setOperation('-')">-</button>
+        <button onclick="appendNumber(1)">1</button>
+        <button onclick="appendNumber(2)">2</button>
+        <button onclick="appendNumber(3)">3</button>
+        <button onclick="setOperation('*')">*</button>
+        <button onclick="appendNumber(0)">0</button>
+        <button onclick="appendNumber('.')">.</button>
+        <button class="equal-btn" onclick="calculateResult()">=</button>
+        <button onclick="setOperation('/')">/</button>
+      </div>
+    </div>
+
     <script>
+      // CBM Calculator logic
       document.getElementById('cbmForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -140,6 +202,67 @@
         let volume = length * width * height * quantity;
         document.getElementById('result').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
       });
+
+      // Normal Calculator logic
+      let currentInput = '0';
+      let currentOperation = null;
+      let previousInput = null;
+
+      function updateDisplay() {
+        document.getElementById('calcDisplay').textContent = currentInput;
+      }
+
+      function appendNumber(number) {
+        if (currentInput === '0') {
+          currentInput = String(number);
+        } else {
+          currentInput += String(number);
+        }
+        updateDisplay();
+      }
+
+      function setOperation(operation) {
+        if (currentOperation !== null) {
+          calculateResult();
+        }
+        previousInput = currentInput;
+        currentInput = '0';
+        currentOperation = operation;
+      }
+
+      function calculateResult() {
+        if (currentOperation === null || previousInput === null) return;
+        let result;
+        const prev = parseFloat(previousInput);
+        const current = parseFloat(currentInput);
+        switch (currentOperation) {
+          case '+':
+            result = prev + current;
+            break;
+          case '-':
+            result = prev - current;
+            break;
+          case '*':
+            result = prev * current;
+            break;
+          case '/':
+            result = prev / current;
+            break;
+        }
+
+        result = result.toFixed(3);  // Limits to 3 decimal places
+        currentInput = result;
+        currentOperation = null;
+        previousInput = null;
+        updateDisplay();
+      }
+
+      function clearDisplay() {
+        currentInput = '0';
+        currentOperation = null;
+        previousInput = null;
+        updateDisplay();
+      }
     </script>
   </body>
 </html>
