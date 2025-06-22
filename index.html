@@ -18,13 +18,12 @@
         background-color: #f1f1f1;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         height: 100vh;
         flex-direction: column;
         padding: 10px;
-        margin-top: -1in; /* Set the top margin to -1 inch */
-        margin: 0; /* Remove any margin */
-        overflow: auto; /* Enable scrolling */
+        margin: 0;
+        overflow: auto;
       }
 
       /* Developer's Name and Contact */
@@ -57,7 +56,7 @@
         background-color: #ffb6c1;
         border-radius: 20px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        margin-top: 0; /* Ensure no additional margin-top */
+        margin-top: 0;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
@@ -222,6 +221,7 @@
         <button type="submit" id="calculateCBM">Calculate CBM</button>
 
         <div class="result" id="cbmResult"></div>
+        <div class="cargo-info" id="cargoInfo"></div> <!-- Cargo info will be displayed here -->
       </div>
 
       <!-- Normal Calculator Form -->
@@ -290,6 +290,10 @@
 
         let volume = length * width * height * quantity;
         document.getElementById('cbmResult').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
+
+        // Cargo Calculation: 32 CBM = 1 car
+        let cargo = volume / 32;
+        document.getElementById('cargoInfo').innerText = `Cargo: ${cargo.toFixed(2)} car(s)`;
       });
 
       // Normal Calculator logic
