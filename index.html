@@ -129,6 +129,13 @@
         margin-bottom: 15px;
       }
 
+      .cargo-info {
+        font-size: 18px;
+        color: #333;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
       /* Mobile Responsiveness */
       @media (max-width: 768px) {
         .container {
@@ -193,6 +200,8 @@
       </form>
 
       <div class="result" id="result"></div>
+
+      <div class="cargo-info" id="cargoInfo"></div> <!-- Cargo info will be displayed here -->
     </div>
 
     <!-- Normal Calculator Section -->
@@ -278,6 +287,10 @@
         // Calculate volume in cubic meters
         let volume = length * width * height * quantity;
         document.getElementById('result').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
+
+        // Cargo Calculation: 32 CBM = 1 car
+        let cargo = volume / 32;
+        document.getElementById('cargoInfo').innerText = `Cargo: ${cargo.toFixed(2)} car(s)`;
       });
 
       // Normal Calculator logic
