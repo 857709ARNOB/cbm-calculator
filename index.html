@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBM and Normal Calculator</title>
+    <title>Unified CBM and Normal Calculator</title>
     <style>
       /* General Reset */
       * {
@@ -19,11 +19,11 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        height: 100vh; /* Ensure body takes full height of the viewport */
+        height: 100vh;
         flex-direction: column;
         padding: 10px;
-        margin: 0; /* Remove any margin */
-        overflow: auto; /* Enable scrolling */
+        margin: 0;
+        overflow: auto;
       }
 
       /* Developer's Name and Contact */
@@ -31,12 +31,12 @@
         font-size: 20px;
         font-weight: bold;
         color: #000;
-        text-align: center; /* Center align */
+        text-align: center;
       }
 
       .developer-contact {
         font-size: 16px;
-        margin-top: 5px; /* Reduced margin */
+        margin-top: 5px;
       }
 
       .whatsapp-link {
@@ -48,19 +48,19 @@
       /* Container Style */
       .container {
         width: 100%;
-        max-width: 450px; /* Limit max width */
+        max-width: 450px;
         padding: 20px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        background-color: #ffb6c1; /* Pink color similar to Casio */
+        background-color: #ffb6c1;
         border-radius: 20px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        margin-top: 0; /* Ensure no top margin */
+        margin-top: 0;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
-        margin-bottom: 20px; /* Space between calculators */
+        margin-bottom: 20px;
       }
 
       /* Headings */
@@ -70,9 +70,9 @@
         font-size: 24px;
       }
 
-      /* CBM Calculator Layout - Auto-adjust width of inputs */
+      /* CBM and Normal Calculator Styles */
       .cbm-form input, .cbm-form select, .cbm-form button {
-        width: 100%; /* Auto adjust to the container width */
+        width: 100%;
         padding: 15px;
         margin: 10px 0;
         border-radius: 25px;
@@ -82,72 +82,14 @@
       }
 
       .cbm-form button {
-        background-color: #ff6f61; /* Light pink */
+        background-color: #ff6f61;
         color: white;
         font-size: 18px;
         cursor: pointer;
       }
 
       .cbm-form button:hover {
-        background-color: #e04e44; /* Darker pink on hover */
-      }
-
-      /* Formula Display (For Normal Calculator only) */
-      .formula {
-        font-size: 18px;
-        color: #000;
-        margin-top: 10px;
-        font-weight: bold;
-        display: inline-block;
-        margin-bottom: 20px;
-        text-align: left;
-        width: 100%;
-      }
-
-      .result {
-        font-size: 30px;
-        font-weight: bold;
-        color: #333;
-        margin-top: 20px;
-      }
-
-      /* Button Style */
-      .buttons {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 15px;
-      }
-
-      .buttons button {
-        background-color: #ff6f61; /* Light pink for number buttons */
-        color: white;
-        font-size: 24px;
-        padding: 20px;
-        border-radius: 50%;
-        border: none;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .buttons button:hover {
-        background-color: #e04e44; /* Darker pink on hover */
-      }
-
-      .operation-btn {
-        background-color: #f57c00; /* Orange background for operations */
-      }
-
-      .operation-btn:hover {
-        background-color: #e65100; /* Darker orange on hover */
-      }
-
-      .equal-btn {
-        background-color: #4caf50; /* Green background for equal */
-        color: white;
-      }
-
-      .equal-btn:hover {
-        background-color: #388e3c; /* Darker green on hover */
+        background-color: #e04e44;
       }
 
       .calc-display {
@@ -161,11 +103,48 @@
         margin-bottom: 15px;
       }
 
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+
+      .buttons button {
+        background-color: #ff6f61;
+        color: white;
+        font-size: 24px;
+        padding: 20px;
+        border-radius: 50%;
+        border: none;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .buttons button:hover {
+        background-color: #e04e44;
+      }
+
+      .operation-btn {
+        background-color: #f57c00;
+      }
+
+      .operation-btn:hover {
+        background-color: #e65100;
+      }
+
+      .equal-btn {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .equal-btn:hover {
+        background-color: #388e3c;
+      }
+
       /* Mobile Responsiveness */
       @media (max-width: 1024px) {
         .container {
           width: 90%;
-          height: auto;
         }
 
         .buttons button {
@@ -176,16 +155,11 @@
         .calc-display {
           font-size: 28px;
         }
-
-        .result {
-          font-size: 24px;
-        }
       }
 
       @media (max-width: 768px) {
         .container {
           width: 95%;
-          height: auto;
         }
 
         .buttons button {
@@ -196,16 +170,11 @@
         .calc-display {
           font-size: 26px;
         }
-
-        .result {
-          font-size: 22px;
-        }
       }
 
       @media (max-width: 480px) {
         .container {
           width: 95%;
-          height: auto;
         }
 
         .buttons button {
@@ -217,17 +186,20 @@
           font-size: 20px;
         }
 
-        .result {
+        .calc-display {
           font-size: 22px;
         }
       }
     </style>
   </head>
   <body>
-    <!-- CBM Calculator Section -->
+    <!-- Unified Calculator -->
     <div class="container">
-      <h1>CBM Calculator</h1>
-      <form id="cbmForm" class="cbm-form">
+      <h1>Unified CBM and Normal Calculator</h1>
+
+      <!-- CBM Calculator Form -->
+      <div id="cbmCalculator" class="cbm-form">
+        <h2>CBM Calculator</h2>
         <input type="number" id="length" placeholder="Length (m)" required>
         <input type="number" id="width" placeholder="Width (m)" required>
         <input type="number" id="height" placeholder="Height (m)" required>
@@ -238,61 +210,44 @@
           <option value="inch">inch</option>
           <option value="feet">feet</option>
         </select>
-        <button type="submit">Calculate CBM</button>
-      </form>
+        <button type="submit" id="calculateCBM">Calculate CBM</button>
 
-      <div class="result" id="result"></div>
+        <div class="result" id="cbmResult"></div>
+      </div>
 
-      <div class="cargo-info" id="cargoInfo"></div> <!-- Cargo info will be displayed here -->
-    </div>
-
-    <!-- Developer's Info and Contact between the calculators -->
-    <div class="developer-info">
-      <p><strong>Friends Knitting Limited</strong></p>
-    </div>
-    <div class="developer-contact">
-      <p>Contact: <strong>+8801794014381</strong></p>
-      <p><a href="https://wa.me/+8801794014381" class="whatsapp-link" target="_blank">WhatsApp</a></p>
-    </div>
-
-    <!-- Normal Calculator Section -->
-    <div class="container normal-calculator">
-      <div class="formula" id="formula">Formula: </div> <!-- Display the formula -->
-      <div class="calc-display" id="calcDisplay">0</div>
-      <div class="buttons">
-        <button class="operation-btn" onclick="clearDisplay()">AC</button>
-        <button class="operation-btn" onclick="appendOperation('%')">%</button>
-        <button class="operation-btn" onclick="appendOperation('(')">(</button>
-        <button class="operation-btn" onclick="appendOperation(')')">)</button>
-        
-        <button onclick="appendNumber(7)">7</button>
-        <button onclick="appendNumber(8)">8</button>
-        <button onclick="appendNumber(9)">9</button>
-        <button class="operation-btn" onclick="appendOperation('+')">+</button>
-        
-        <button onclick="appendNumber(4)">4</button>
-        <button onclick="appendNumber(5)">5</button>
-        <button onclick="appendNumber(6)">6</button>
-        <button class="operation-btn" onclick="appendOperation('-')">-</button>
-        
-        <button onclick="appendNumber(1)">1</button>
-        <button onclick="appendNumber(2)">2</button>
-        <button onclick="appendNumber(3)">3</button>
-        <button class="operation-btn" onclick="appendOperation('*')">*</button>
-        
-        <button onclick="appendNumber(0)">0</button>
-        <button onclick="appendNumber('.')">.</button>
-        <button class="equal-btn" onclick="calculateResult()">=</button>
-        <button class="operation-btn" onclick="appendOperation('/')">/</button>
-        
-        <!-- Backspace Button -->
-        <button class="operation-btn" onclick="deleteLast()">←</button> <!-- Backspace/Delete button -->
+      <!-- Normal Calculator Form -->
+      <div id="normalCalculator">
+        <div class="formula" id="formula">Formula: </div>
+        <div class="calc-display" id="calcDisplay">0</div>
+        <div class="buttons">
+          <button class="operation-btn" onclick="clearDisplay()">AC</button>
+          <button class="operation-btn" onclick="appendOperation('%')">%</button>
+          <button class="operation-btn" onclick="appendOperation('(')">(</button>
+          <button class="operation-btn" onclick="appendOperation(')')">)</button>
+          <button onclick="appendNumber(7)">7</button>
+          <button onclick="appendNumber(8)">8</button>
+          <button onclick="appendNumber(9)">9</button>
+          <button class="operation-btn" onclick="appendOperation('+')">+</button>
+          <button onclick="appendNumber(4)">4</button>
+          <button onclick="appendNumber(5)">5</button>
+          <button onclick="appendNumber(6)">6</button>
+          <button class="operation-btn" onclick="appendOperation('-')">-</button>
+          <button onclick="appendNumber(1)">1</button>
+          <button onclick="appendNumber(2)">2</button>
+          <button onclick="appendNumber(3)">3</button>
+          <button class="operation-btn" onclick="appendOperation('*')">*</button>
+          <button onclick="appendNumber(0)">0</button>
+          <button onclick="appendNumber('.')">.</button>
+          <button class="equal-btn" onclick="calculateResult()">=</button>
+          <button class="operation-btn" onclick="appendOperation('/')">/</button>
+          <button class="operation-btn" onclick="deleteLast()">←</button>
+        </div>
       </div>
     </div>
 
     <script>
       // CBM Calculator logic
-      document.getElementById('cbmForm').addEventListener('submit', function(event) {
+      document.getElementById('calculateCBM').addEventListener('click', function(event) {
         event.preventDefault();
 
         var length = parseFloat(document.getElementById('length').value);
@@ -301,9 +256,9 @@
         var quantity = parseInt(document.getElementById('quantity').value);
         var unit = document.getElementById('unit').value;
 
-        // Check if all inputs are valid
+        // Validate inputs
         if (isNaN(length) || isNaN(width) || isNaN(height) || isNaN(quantity) || !unit) {
-          document.getElementById('result').innerText = 'Please fill in all fields correctly.';
+          document.getElementById('cbmResult').innerText = 'Please fill in all fields correctly.';
           return;
         }
 
@@ -316,7 +271,7 @@
 
         let factor = conversionFactors[unit];
         if (!factor) {
-          document.getElementById('result').innerText = 'Invalid unit';
+          document.getElementById('cbmResult').innerText = 'Invalid unit';
           return;
         }
 
@@ -324,18 +279,13 @@
         width = width * factor;
         height = height * factor;
 
-        // Calculate volume in cubic meters
         let volume = length * width * height * quantity;
-        document.getElementById('result').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
-
-        // Cargo Calculation: 32 CBM = 1 car
-        let cargo = volume / 32;
-        document.getElementById('cargoInfo').innerText = `Cargo: ${cargo.toFixed(2)} car(s)`;
+        document.getElementById('cbmResult').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
       });
 
       // Normal Calculator logic
       let currentInput = '0';
-      let formula = '';  // Variable to store the formula as a string
+      let formula = '';
 
       function updateFormula() {
         document.getElementById('formula').innerText = 'Formula: ' + formula;
