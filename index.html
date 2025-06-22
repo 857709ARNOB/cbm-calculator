@@ -192,7 +192,6 @@
         <button type="submit">Calculate CBM</button>
       </form>
 
-      <div class="formula" id="formula">Formula: </div>  <!-- Display the formula -->
       <div class="result" id="result"></div>
     </div>
 
@@ -278,7 +277,6 @@
 
         // Calculate volume in cubic meters
         let volume = length * width * height * quantity;
-        document.getElementById('formula').innerText = `Formula: ${length} * ${width} * ${height} * ${quantity} = ${volume.toFixed(3)} m³`;  // Show the formula
         document.getElementById('result').innerText = 'Total Volume: ' + volume.toFixed(3) + ' m³';
       });
 
