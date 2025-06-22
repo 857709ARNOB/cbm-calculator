@@ -36,13 +36,16 @@
       .container {
         background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
         width: 80%;  /* Container takes up 80% of the screen width */
-        max-width: 500px; /* Maximum width for large screens */
+        height: 80%; /* Container takes up 80% of the screen height */
         padding: 20px;
         border-radius: 20px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
         margin-bottom: 20px;
         animation: colorCycle 10s infinite; /* Multi-color animation */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
       h1 {
@@ -92,8 +95,9 @@
         border-radius: 15px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
-        margin-top: 30px;
-        width: 100%; /* Take full width of the container */
+        width: 100%; /* Full width of the container */
+        margin-top: 20px;
+        height: 50%; /* Calculator takes up 50% of the container's height */
       }
 
       .calc-display {
@@ -158,6 +162,7 @@
       @media (max-width: 768px) {
         .container {
           width: 80%;
+          height: 80%;
           padding: 10px;
           max-width: 100%;
         }
@@ -178,6 +183,8 @@
 
       @media (max-width: 480px) {
         .container {
+          width: 80%;
+          height: 80%;
           padding: 15px;
           max-width: 100%;
         }
